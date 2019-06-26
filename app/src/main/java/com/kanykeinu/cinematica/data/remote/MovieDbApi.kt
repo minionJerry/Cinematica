@@ -14,7 +14,7 @@ interface MovieDbApi {
     fun getMoviesChanges(@Query("start_date") startDate : String?, @Query("end_date") endDate : String?, @Query("page") page : Int?) : Observable<Results>
 
     @GET("3/movie/{movie_id}")
-    fun getMovieInfo(@Path("movie_id") movieId : Int, @Query("append_to_response") appendToResponse : String = "images") : Observable<MovieInfoResponse>
+    fun getMovieInfo(@Path("movie_id") movieId : Int) : Observable<MovieInfoResponse>
 
 
 }

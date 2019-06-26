@@ -7,7 +7,7 @@ data class MovieInfoResponse(
     @SerializedName("backdrop_path")
     val backdropPath: String,
     val budget: Int,
-//    val genres : Array<Genre>,
+    val genres : Array<Genre>,
     @SerializedName("original_language")
     val originalLanguage: String,
     @SerializedName("original_title")

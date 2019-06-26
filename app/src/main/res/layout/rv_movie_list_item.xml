@@ -15,7 +15,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:placeholderImage="@color/colorPlaceholder"/>
+            app:placeholderImage="@drawable/movie_time"/>
 
     <View
             android:id="@+id/bg_title"

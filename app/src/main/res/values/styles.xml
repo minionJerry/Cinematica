@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_view</item>
+    </style>
+
     <style name="MovieTitleText">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textAlignment">center</item>
