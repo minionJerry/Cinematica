@@ -28,6 +28,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:actualImageScaleType="fitCenter"
+                    app:placeholderImage="@drawable/movie_time"
             />
 
             <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"

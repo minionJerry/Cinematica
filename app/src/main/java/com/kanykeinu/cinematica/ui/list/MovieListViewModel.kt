@@ -13,6 +13,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
+const val MOVIES_COUNT_LIMIT = 20
+
 class MovieListViewModel(private val api: MovieDbApi) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -20,13 +22,13 @@ class MovieListViewModel(private val api: MovieDbApi) : ViewModel() {
     val movies = MutableLiveData<List<MovieInfoResponse>>()
     val isLoading = ObservableField<Boolean>(false)
 
-    fun loadMovieChanges(startDate: String?, endDate: String?, page: Int?) {
-        if (movies.value != null) movies.value = movies.value
+    fun loadMovieChanges(startDate: String?=null, endDate: String?=null, page: Int=1) {
+        if (movies.value != null && startDate == null) movies.value = movies.value
         else {
             isLoading.set(true)
             compositeDisposable.add(
                 api.getMoviesChanges(startDate, endDate, page)
-                    .map { results -> results.list.takeLast(20) }
+                    .map { results -> results.list.take(MOVIES_COUNT_LIMIT) }
                     .flatMapIterable { movieList -> movieList }
                     .filter { movieChanges -> !movieChanges.adult }
                     .flatMap { movieChanges ->

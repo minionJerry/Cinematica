@@ -6,4 +6,6 @@
     <string name="genre">Genre</string>
     <string name="language">Language</string>
     <string name="overview">Overview</string>
+    <string name="date">Date</string>
+    <string name="select_start_date">Select start date</string>
 </resources>

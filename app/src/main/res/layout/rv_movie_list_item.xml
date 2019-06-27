@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/movie_cover"
             android:background="@color/colorPrimary"
-            android:alpha="0.4"/>
+            android:alpha="0.7"/>
 
     <TextView
             android:id="@+id/movie_title"
@@ -33,11 +33,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/bg_title"
             app:layout_constraintBottom_toBottomOf="@id/bg_title"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:textAppearance="@style/MovieTitleText"
-            tools:text="Dark Fenix"
+            tools:text="Dark Phoenix"
+            android:ellipsize="end"
             android:maxLines="2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
