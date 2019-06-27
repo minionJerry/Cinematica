@@ -21,26 +21,29 @@ class MovieListViewModel(private val api: MovieDbApi) : ViewModel() {
     val isLoading = ObservableField<Boolean>(false)
 
     fun loadMovieChanges(startDate: String?, endDate: String?, page: Int?) {
-        isLoading.set(true)
-        compositeDisposable.add(
-            api.getMoviesChanges(startDate, endDate, page)
-                .map { results -> results.list.takeLast(21) }
-                .flatMapIterable { movieList -> movieList }
-                .filter { movieChanges -> !movieChanges.adult }
-                .flatMap { movieChanges ->
-                    loadMovieInfo(movieChanges.id)
-                }.toList().toObservable()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-
-                .subscribe({
-                    movies.value = it
-                }, {
-                    error.value = it.message
-                },{
-                    isLoading.set(false)
-                })
-        )
+        if (movies.value != null) movies.value = movies.value
+        else {
+            isLoading.set(true)
+            compositeDisposable.add(
+                api.getMoviesChanges(startDate, endDate, page)
+                    .map { results -> results.list.takeLast(20) }
+                    .flatMapIterable { movieList -> movieList }
+                    .filter { movieChanges -> !movieChanges.adult }
+                    .flatMap { movieChanges ->
+                        loadMovieInfo(movieChanges.id).onErrorResumeNext(Observable.empty())
+                    }.toList().toObservable()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        movies.value = it
+                    }, {
+                        error.value = it.message
+                        isLoading.set(false)
+                    }, {
+                        isLoading.set(false)
+                    })
+            )
+        }
     }
 
     private fun loadMovieInfo(movieId: Int): Observable<MovieInfoResponse> {

@@ -1,4 +1,4 @@
-package com.kanykeinu.cinematica.ui.detail
+package com.kanykeinu.cinematica.ui.list
 
 import android.util.Log
 import com.kanykeinu.cinematica.R
@@ -12,8 +12,9 @@ class MovieListAdapter : BaseAdapter<MovieInfoResponse>(R.layout.rv_movie_list_i
 
     override fun onBindViewHolder(holder: BaseHolder, position: Int, item: MovieInfoResponse) {
         val movie = list[position]
-        holder.itemView.movie_cover.setImageURI(movie.getImageUrl())
-        Log.d("Image url-->", movie.getImageUrl())
+        val imageInfo = movie.getPosterImage()
+        holder.itemView.movie_cover.setImageURI(movie.getPosterImage())
+        Log.d("Image url-->", movie.getPosterImage())
         holder.itemView.movie_title.text = movie.title
     }
 }

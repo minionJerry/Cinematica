@@ -13,5 +13,8 @@
     </fragment>
     <fragment android:id="@+id/movieDetailsFragment"
               android:name="com.kanykeinu.cinematica.ui.detail.MovieDetailsFragment"
-              android:label="movie_details_fragment" tools:layout="@layout/movie_details_fragment"/>
+              android:label="movie_details_fragment" tools:layout="@layout/movie_details_fragment">
+        <argument android:name="movie_info"
+                  app:argType="com.kanykeinu.cinematica.data.remote.responses.MovieInfoResponse"/>
+    </fragment>
 </navigation>

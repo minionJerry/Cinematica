@@ -8,15 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 
 import com.kanykeinu.cinematica.R
+import com.kanykeinu.cinematica.data.remote.responses.MovieInfoResponse
 import com.kanykeinu.cinematica.databinding.MovieListFragmentBinding
 import com.kanykeinu.cinematica.injection.Injector
-import com.kanykeinu.cinematica.ui.detail.MovieListAdapter
+import com.kanykeinu.cinematica.ui.MainActivity
+import com.kanykeinu.cinematica.ui.base.BaseAdapter
 import com.kanykeinu.cinematica.util.observe
 import com.kanykeinu.cinematica.util.showSnackBar
 
-class MovieListFragment : Fragment() {
+class MovieListFragment : Fragment(), BaseAdapter.ItemClickListener<MovieInfoResponse> {
 
     private lateinit var movieAdapter: MovieListAdapter
     private lateinit var dataBinding: MovieListFragmentBinding
@@ -44,8 +47,21 @@ class MovieListFragment : Fragment() {
         getMovies()
     }
 
+    override fun onStart() {
+        super.onStart()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.app_name)
+
+    }
+
+    override fun onClick(position: Int, item: MovieInfoResponse) {
+        val action = MovieListFragmentDirections.actionMovieListFragmentToMovieDetailsFragment(item)
+        findNavController().navigate(action)
+    }
+
+
     private fun initViews(){
         movieAdapter = MovieListAdapter()
+        movieAdapter.listener = this
         dataBinding.rvMovieList.setHasFixedSize(true)
         dataBinding.rvMovieList.adapter = movieAdapter
     }
