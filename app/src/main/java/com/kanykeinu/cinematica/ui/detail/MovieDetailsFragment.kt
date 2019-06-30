@@ -13,18 +13,20 @@ import com.kanykeinu.cinematica.R
 import com.kanykeinu.cinematica.data.remote.responses.MovieInfoResponse
 import com.kanykeinu.cinematica.ui.MainActivity
 
+const val MOVIE_KEY = "MOVIE"
 
 class MovieDetailsFragment : Fragment() {
 
     private lateinit var dataBinding: com.kanykeinu.cinematica.databinding.MovieDetailsFragmentBinding
-    private lateinit var viewModel: MovieDetailsViewModel
     private val argument: MovieDetailsFragmentArgs by navArgs()
     private var movieInfo: MovieInfoResponse? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        movieInfo = argument.movieInfo
-        (activity as MainActivity).supportActionBar?.title = movieInfo?.title
+        movieInfo = if (savedInstanceState != null) savedInstanceState.getParcelable(MOVIE_KEY)
+        else
+            argument.movieInfo
     }
 
     override fun onCreateView(
@@ -35,10 +37,19 @@ class MovieDetailsFragment : Fragment() {
         return dataBinding.root
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MovieDetailsViewModel::class.java)
+        (activity as MainActivity).supportActionBar?.title = movieInfo?.title
         bindData()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(
+            MOVIE_KEY,
+            movieInfo
+        )
     }
 
     private fun bindData() {
@@ -51,7 +62,7 @@ class MovieDetailsFragment : Fragment() {
             dataBinding.tvGenre.text = movieInfo?.genres?.get(0)?.name
         dataBinding.tvOverview.text = movieInfo?.overview
         dataBinding.tvLanguage.text = movieInfo?.originalLanguage
-        dataBinding.ratingBar.rating = movieInfo?.voteAverage!!.toFloat()/2
+        dataBinding.ratingBar.rating = movieInfo?.voteAverage!!.toFloat() / 2
         dataBinding.tvRating.text = movieInfo?.voteAverage.toString()
     }
 

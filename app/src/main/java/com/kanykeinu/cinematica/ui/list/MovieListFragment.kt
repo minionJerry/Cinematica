@@ -9,6 +9,8 @@ import android.widget.DatePicker
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.kanykeinu.cinematica.R
 import com.kanykeinu.cinematica.data.remote.responses.MovieInfoResponse

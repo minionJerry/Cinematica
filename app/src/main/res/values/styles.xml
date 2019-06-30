@@ -26,9 +26,28 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="MovieTitleTextTablet">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
     <style name="Title">
         <item name="android:textSize">
             22sp
+        </item>
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+        <item name="android:fontFamily">
+            sans-serif-medium
+        </item>
+    </style>
+
+    <style name="TitleTablet">
+        <item name="android:textSize">
+            30sp
         </item>
         <item name="android:textColor">
             #FFFFFF
@@ -47,9 +66,30 @@
         </item>
     </style>
 
+    <style name="MovieDescriptionTablet">
+        <item name="android:textSize">
+            22sp
+        </item>
+        <item name="android:textColor">
+            #E9EDF0
+        </item>
+    </style>
+
     <style name="Label">
         <item name="android:textSize">
             18sp
+        </item>
+        <item name="android:textColor">
+            #FFFFFF
+        </item>
+        <item name="android:fontFamily">
+            sans-serif-medium
+        </item>
+    </style>
+
+    <style name="LabelTablet">
+        <item name="android:textSize">
+            25sp
         </item>
         <item name="android:textColor">
             #FFFFFF

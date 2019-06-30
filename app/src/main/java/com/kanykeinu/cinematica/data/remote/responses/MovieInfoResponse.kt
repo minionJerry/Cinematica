@@ -6,8 +6,8 @@ import com.kanykeinu.cinematica.data.pojo.Genre
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
-const val POSTER_REQUEST_URL = "http://image.tmdb.org/t/p/w342"
-const val BACKDROP_REQUEST_URL = "http://image.tmdb.org/t/p/w780"
+const val POSTER_REQUEST_URL = "http://image.tmdb.org/t/p/w1280"
+const val BACKDROP_REQUEST_URL = "http://image.tmdb.org/t/p/w1280"
 
 @Parcelize
 data class MovieInfoResponse(

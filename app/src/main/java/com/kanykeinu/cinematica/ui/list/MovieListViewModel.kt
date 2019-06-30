@@ -2,11 +2,8 @@ package com.kanykeinu.cinematica.ui.list
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel;
-import com.kanykeinu.cinematica.data.pojo.Movie
 import com.kanykeinu.cinematica.data.remote.MovieDbApi
-import com.kanykeinu.cinematica.data.remote.responses.MovieChangesResponse
 import com.kanykeinu.cinematica.data.remote.responses.MovieInfoResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
