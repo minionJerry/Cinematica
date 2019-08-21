@@ -1,19 +1,18 @@
 package com.kanykeinu.cinematica.data.remote
 
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
+import android.content.Context
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-import okhttp3.HttpUrl
 
 const val BASE_URL = "https://api.themoviedb.org/"
 const val API_KEY  = "28e7c6ddf0fd55eaddd97cf21a0c2a81"
 
 object Retrofit {
 
-    fun getApi() : MovieDbApi{
+    fun getApi(context: Context) : MovieDbApi{
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -32,13 +31,22 @@ object Retrofit {
             return@Interceptor chain.proceed(request)
         }
 
+        val cacheControlInterceptor = Interceptor { chain ->
+            val newBuilder = chain.request().newBuilder().header("Cache-Control", "public, max-age=" + 60*30)
+                return@Interceptor chain.proceed(newBuilder.build())
+        }
+
 
         val httpClient = OkHttpClient.Builder()
-        httpClient.connectTimeout(15, TimeUnit.SECONDS)
+        httpClient
+            .cache(
+                Cache(context.cacheDir, 10 * 1024 * 1024))
+            .connectTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
             .addInterceptor(authInterceptor)
+            .addInterceptor(cacheControlInterceptor)
             .retryOnConnectionFailure(true)
 
         val retrofit = retrofit2.Retrofit.Builder()
@@ -51,4 +59,6 @@ object Retrofit {
 
         return retrofit.create(MovieDbApi::class.java)
     }
+
+
 }

@@ -33,7 +33,7 @@ class MovieListFragment : Fragment(), BaseAdapter.ItemClickListener<MovieInfoRes
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        val viewModelFactory = Injector.provideMovieListViewModelFactory()
+        val viewModelFactory = Injector.provideMovieListViewModelFactory(context!!.applicationContext)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(MovieListViewModel::class.java)
     }
 
